@@ -1,0 +1,37 @@
+@charset "ISO-8859-1";
+
+* {
+	border: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	margin-top: 100px;
+	max-width: 400px;
+	max-height:600px;
+}
+
+h1{
+	font-size: 28pt;
+	margin-bottom: 30px;
+}
+
+h1, div.botao, p {
+	text-align: center;
+}
+
+.msg {
+	color: #ff0000;
+	position: relative;
+    margin-top: 1rem;
+    
+}

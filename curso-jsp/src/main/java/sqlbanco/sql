@@ -1,0 +1,48 @@
+// ######################### CRIANDO BANCO DE DADOS ##########################################
+
+CREATE DATABASE "curso-jsp"
+    WITH 
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Portuguese_Brazil.1252'
+    LC_CTYPE = 'Portuguese_Brazil.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1;
+
+
+// ######################### CRIANDO TABELA ##################################################
+
+CREATE TABLE public.model_login
+(
+    login character varying(200) COLLATE pg_catalog."default",
+    senha character varying(200) COLLATE pg_catalog."default",
+    CONSTRAINT login_unique UNIQUE (login)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE public.model_login
+    OWNER to postgres;
+    
+
+// ######################### INSERINDO USUARIO ###############################################
+
+INSERT INTO public.model_login(
+	login, senha)
+	VALUES ('admin', 'admin');    
+	
+// ######################### INSERINDO COLUNA DE "codigo" ####################################
+
+ALTER TABLE model_login ADD codigo SERIAL PRIMARY KEY;
+	
+// ######################### ALTER TABLE "nome" ##############################################
+
+ALTER TABLE model_login ADD nome CHARACTER VARYING(255);
+UPDATE model_login SET nome = 'administrador';
+ALTER TABLE model_login ALTER COLUMN nome SET NOT NULL;
+
+// ######################### ALTER TABLE "email" #############################################
+
+ALTER TABLE model_login ADD email CHARACTER VARYING(255);
+UPDATE model_login SET email = '';
+ALTER TABLE model_login ALTER COLUMN email SET NOT NULL;
