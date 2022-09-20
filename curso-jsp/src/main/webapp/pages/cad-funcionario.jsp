@@ -34,7 +34,7 @@
 							<div class="page-block">
 								<div class="row align-items-center">
 									<div class="col-md-8">
-										<h2 class="page-title">Cadastro de usuário</h2>
+										<h2 class="page-title">Cadastro de funcionário</h2>
 									</div>
 									<div class="col-md-4">
 										<ul class="breadcrumb-title">
@@ -63,24 +63,15 @@
 														<!-- Nav tabs -->
 														<ul class="nav nav-tabs tabs" role="tablist">
 															<li class="nav-item"><a class="nav-link active"
-																data-toggle="tab" href="#cadastro" role="tab">Principal</a>
-															</li>
-															<li class="nav-item"><a class="nav-link"
-																data-toggle="tab" href="#contato" role="tab">Contato</a>
-															</li>
-															<li class="nav-item"><a class="nav-link"
-																data-toggle="tab" href="#endereco" role="tab">Endereço</a>
+																data-toggle="tab" href="#menu01" role="tab">Principal</a>
 															</li>
 														</ul>
-														<form
-															action="<%=request.getContextPath()%>/ServletUsuarioController"
-															method="post" id="formUser">
-															<input type="hidden" name="acao" id="acao" value="">
-															<!-- ação para pegar no GET do servlet -->
+														<form action="<%=request.getContextPath()%>/#" method="post" id="form#">
+															<input type="hidden" name="acao" id="acao" value=""><!-- ação para pegar no GET do servlet -->
 															<!-- Tab panes -->
 															<div class="tab-content tabs card-block">
 																<!-- TAB PRINCIPAL ---------- -->
-																<div class="tab-pane active" id="cadastro"
+																<div class="tab-pane active" id="menu01"
 																	role="tabpanel">
 																	<div class="form-group row">
 																		<!-- linha 1 -->
