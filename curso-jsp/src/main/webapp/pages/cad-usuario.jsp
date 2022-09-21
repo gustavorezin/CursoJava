@@ -65,18 +65,9 @@
 															<li class="nav-item"><a class="nav-link active"
 																data-toggle="tab" href="#cadastro" role="tab">Principal</a>
 															</li>
-															<li class="nav-item"><a class="nav-link"
-																data-toggle="tab" href="#contato" role="tab">Contato</a>
-															</li>
-															<li class="nav-item"><a class="nav-link"
-																data-toggle="tab" href="#endereco" role="tab">Endereço</a>
-															</li>
 														</ul>
-														<form
-															action="<%=request.getContextPath()%>/ServletUsuarioController"
-															method="post" id="formUser">
-															<input type="hidden" name="acao" id="acao" value="">
-															<!-- ação para pegar no GET do servlet -->
+														<form action="<%=request.getContextPath()%>/ServletUsuarioController" method="post" id="formUser">
+															<input type="hidden" name="acao" id="acao" value=""> <!-- ação para pegar no GET do servlet -->
 															<!-- Tab panes -->
 															<div class="tab-content tabs card-block">
 																<!-- TAB PRINCIPAL ---------- -->
@@ -103,20 +94,6 @@
 																				</span>
 																			</div>
 																		</div>
-																		<div class="form-group col-md-4">
-																			<label for="nomefantasia">Nome
-																				Fantasia/Apelido</label> <input type="text"
-																				class="form-control" name="nomefantasia"
-																				id="nomefantasia" maxlength="60" autocomplete="off"
-																				value="${modelLogin.nomefantasia}">
-																		</div>
-																		<div class="form-group col-md-2">
-																			<label for="dataNascimento">Dat. Nascimento</label> <input
-																				type="date" class="form-control"
-																				name="dataNascimento" id="dataNascimento"
-																				autocomplete="off"
-																				value="${modelLogin.dataNascimento}">
-																		</div>
 																		<!-- linha 2 -->
 																		<div class="form-group col-md-3">
 																			<label for="login">Login</label> <input type="text"
@@ -140,104 +117,10 @@
 																					${modelLogin.grupo == 'SECRETARIO' ? 'selected' : ''}>Secretário(a)</option>
 																			</select>
 																		</div>
-																		<div class="form-group col-md-3">
-																			<label for="salario">Salário</label> <input
-																				type="text" class="form-control" name="salario"
-																				id="salario" autocomplete="off"
-																				placeholder="R$ 0,00" value="${modelLogin.salario}">
-																		</div>
 																		<!-- linha 3 -->
-																		<div class="form-group col-md-2">
-																			<input type="radio" name="sexo" id="M" value="M"
-																				${modelLogin.sexo == 'M' ? 'checked' : ''}>
-																			<label for="M">Masculino</label>
-																		</div>
-																		<div class="form-group col-md-2">
-																			<input type="radio" name="sexo" id="F" value="F"
-																				${modelLogin.sexo == 'F' ? 'checked' : ''}>
-																			<label for="F">Feminino</label>
-																		</div>
 																	</div>
 																</div>
 
-																<!-- TAB CONTATO ---------- -->
-																<div class="tab-pane" id="contato" role="tabpanel">
-																	<div class="form-group row">
-																		<!-- linha 1 -->
-																		<div class="form-group col-md-3">
-																			<label for="fone1">Telefone 1</label> <input
-																				type="text" class="form-control" name="fone1"
-																				id="fone1" required value="${modelLogin.fone1}">
-																		</div>
-																		<div class="form-group col-md-3">
-																			<label for="fone2">Telefone 2</label> <input
-																				type="text" class="form-control" name="fone2"
-																				id="fone2" value="${modelLogin.fone2}">
-																		</div>
-																		<div class="form-group col-md-3">
-																			<label for="celular1">Celular 1</label> <input
-																				type="text" class="form-control" name="celular1"
-																				id="celular1" value="${modelLogin.celular1}">
-																		</div>
-																		<div class="form-group col-md-3">
-																			<label for="celular2">Celular 2</label> <input
-																				type="text" class="form-control" name="celular2"
-																				id="celular2" value="${modelLogin.celular2}">
-																		</div>
-																		<!-- linha 2 -->
-																		<div class="form-group col-md-6">
-																			<label for="email">E-mail</label> <input type="email"
-																				class="form-control" name="email" id="email"
-																				required value="${modelLogin.email}">
-																		</div>
-																		<div class="form-group col-md-6">
-																			<label for="site">Site</label> <input type="text"
-																				class="form-control" name="site" id="site"
-																				value="${modelLogin.site}">
-																		</div>
-																	</div>
-																</div>
-
-																<!-- TAB ENDERECO ---------- -->
-																<div class="tab-pane" id="endereco" role="tabpanel">
-
-																	<div class="form-group row">
-																		<!-- linha 1 -->
-																		<div class="form-group col-md-2">
-																			<label for="cep">CEP</label> <input type="text"
-																				class="form-control" name="cep" id="cep"
-																				onblur="pesquisaCep()" required
-																				value="${modelLogin.cep}">
-																		</div>
-																		<div class="form-group col-md-5">
-																			<label for="uf">Estado</label> <input type="text"
-																				class="form-control" name="uf" id="uf" required
-																				value="${modelLogin.uf}">
-																		</div>
-																		<div class="form-group col-md-5">
-																			<label for="cidade">Cidade</label> <input type="text"
-																				class="form-control" name="cidade" id="cidade"
-																				required value="${modelLogin.cidade}">
-																		</div>
-																		<!-- linha 2 -->
-																		<div class="form-group col-md-5">
-																			<label for="logradouro">Logradouro</label> <input
-																				type="text" class="form-control" name="logradouro"
-																				id="logradouro" value="${modelLogin.logradouro}">
-																		</div>
-																		<div class="form-group col-md-2">
-																			<label for="numero">Número</label> <input type="text"
-																				class="form-control" name="numero" id="numero"
-																				value="${modelLogin.numero}">
-																		</div>
-																		<div class="form-group col-md-5">
-																			<label for="bairro">Bairro</label> <input type="text"
-																				class="form-control" name="bairro" id="bairro"
-																				required value="${modelLogin.bairro}">
-																		</div>
-																	</div>
-
-																</div>
 																<hr>
 																<!-- BOTOES ---------- -->
 																<button class="btn btn-success waves-effect waves-light"
