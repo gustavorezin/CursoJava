@@ -1,8 +1,8 @@
 package servlets;
 
+import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,8 +30,8 @@ public class ServletUsuarioController extends ServletGenericUtil {
 		try {
 			// DELETE COM AJAX ----------
 			if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("deletarajax")) { 
-				String cadUser = request.getParameter("codigo");
-				dao.deletarUsuario(cadUser);
+				String codigo = request.getParameter("codigo");
+				dao.deletarUsuario(codigo);
 				response.getWriter().write("Deletado com sucesso!");
 				request.getRequestDispatcher("pages/cad-usuario.jsp").forward(request, response);
 				
@@ -52,8 +52,50 @@ public class ServletUsuarioController extends ServletGenericUtil {
 				ModelLogin usuario = dao.consultarUsuarioCodigo(Integer.valueOf(codigo)); // pega todos os dados do usuario
 				request.setAttribute("modelLogin", usuario); // atributo que vai preencher a tela
 				request.getRequestDispatcher("pages/cad-usuario.jsp").forward(request, response);
- 				
-			} else {
+ 			
+			// IMPRIMIR NA TELA ----------	
+			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("imprimirRelatorioHtml")) {
+				System.out.println("entrou aqui");
+				
+				String nome = request.getParameter("nome");
+				 
+				if (nome == null || nome.isEmpty()) {
+					request.setAttribute("listaUser", dao.buscaUserList());
+				}else {
+					request.setAttribute("listaUser", dao.buscaUserList(nome));
+				}
+				 
+				request.setAttribute("nome", nome);
+				request.getRequestDispatcher("pages/rel-user.jsp").forward(request, response);
+				 
+			 } /*else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("imprimirRelatorioPDF")) {
+				 
+				 String dataInicial = request.getParameter("dataInicial");
+				 String dataFinal = request.getParameter("dataFinal");
+				 
+				 List<ModelLogin> modelLogins = null;
+				 
+				 if (dataInicial == null || dataInicial.isEmpty() 
+						 && dataFinal == null || dataFinal.isEmpty()) {
+					 
+					 modelLogins = dao.consultaUsuarioListRel(super.getUserLogado(request));
+					 
+				 }else {
+					 
+					 modelLogins = dao.consultaUsuarioListRel(super.getUserLogado(request), dataInicial, dataFinal);
+				 }
+				 
+				 
+				 HashMap<String, Object> params = new HashMap<String, Object>();
+				 params.put("PARAM_SUB_REPORT", request.getServletContext().getRealPath("relatorio") + File.separator);
+				 
+				 byte[] relatorio = new ReportUtil().geraReltorioPDF(modelLogins, "resl-user-jsp", params ,request.getServletContext());
+				 
+				 
+				 response.setHeader("Content-Disposition", "attachment;filename=arquivo.pdf");
+				 response.getOutputStream().write(relatorio);
+				 
+			 }*/else {
 				request.getRequestDispatcher("pages/cad-usuario.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
@@ -70,51 +112,20 @@ public class ServletUsuarioController extends ServletGenericUtil {
 			
 			String codigo = request.getParameter("codigo");
 			String nome = request.getParameter("nome");
-			String nomefantasia = request.getParameter("nomefantasia");
-			String dataNascimento = request.getParameter("dataNascimento");
+			String email = request.getParameter("email");
 			String login = request.getParameter("login");
 			String senha = request.getParameter("senha");
 			String grupo = request.getParameter("grupoUsuario");
-			String salario = request.getParameter("salario");
-			String sexo = request.getParameter("sexo");
-			String cep = request.getParameter("cep");
-			String uf = request.getParameter("uf");
-			String cidade = request.getParameter("cidade");
-			String logradouro = request.getParameter("logradouro");
-			String numero = request.getParameter("numero");
-			String bairro = request.getParameter("bairro");
-			String fone1 = request.getParameter("fone1");
-			String fone2 = request.getParameter("fone2");
-			String celular1 = request.getParameter("celular1");
-			String celular2 = request.getParameter("celular2");
-			String email = request.getParameter("email");
-			String site = request.getParameter("site");
 			
-			salario = salario.split("\\ ")[1].replaceAll("\\.", "").replaceAll("\\,", ".");
 			
 			ModelLogin modelLogin = new ModelLogin();
 			
 			modelLogin.setCodigo(codigo != null && !codigo.isEmpty() ? Integer.valueOf(codigo) : null);
 			modelLogin.setNome(nome);
-			modelLogin.setNomefantasia(nomefantasia);
-			modelLogin.setDataNascimento(new Date(new SimpleDateFormat("yyyy-MM-dd").parse(dataNascimento).getTime()));
+			modelLogin.setEmail(email);
 			modelLogin.setLogin(login);
 			modelLogin.setSenha(senha);
 			modelLogin.setGrupo(grupo);
-			modelLogin.setSalario(Double.valueOf(salario));
-			modelLogin.setSexo(sexo);
-			modelLogin.setCep(cep);
-			modelLogin.setUf(uf);
-			modelLogin.setCidade(cidade);
-			modelLogin.setLogradouro(logradouro);
-			modelLogin.setNumero(numero);
-			modelLogin.setBairro(bairro);
-			modelLogin.setFone1(fone1);
-			modelLogin.setFone2(fone2);
-			modelLogin.setCelular1(celular1);
-			modelLogin.setCelular2(celular2);
-			modelLogin.setEmail(email);
-			modelLogin.setSite(site);
 			
 			if (dao.validarLogin(modelLogin.getLogin()) && modelLogin.getCodigo() == null) {
 				msg = "Já existe usuário com o mesmo login!";

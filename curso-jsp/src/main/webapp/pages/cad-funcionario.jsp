@@ -65,132 +65,122 @@
 															<li class="nav-item"><a class="nav-link active"
 																data-toggle="tab" href="#menu01" role="tab">Principal</a>
 															</li>
+															<li class="nav-item"><a class="nav-link"
+																data-toggle="tab" href="#menu02" role="tab">Contato</a>
+															</li>
+															<li class="nav-item"><a class="nav-link"
+																data-toggle="tab" href="#menu03" role="tab">Endereço</a>
+															</li>
 														</ul>
-														<form action="<%=request.getContextPath()%>/#" method="post" id="form#">
+														<form action="<%=request.getContextPath()%>/ServletFuncionario" method="post" id="formFunc">
 															<input type="hidden" name="acao" id="acao" value=""><!-- ação para pegar no GET do servlet -->
 															<!-- Tab panes -->
 															<div class="tab-content tabs card-block">
 																<!-- TAB PRINCIPAL ---------- -->
-																<div class="tab-pane active" id="menu01"
-																	role="tabpanel">
+																<div class="tab-pane active" id="menu01" role="tabpanel">
 																	<div class="form-group row">
 																		<!-- linha 1 -->
 																		<div class="form-group col-md-1">
-																			<label for="codigo">Código</label> <input type="text"
-																				class="form-control" name="codigo" id="codigo"
-																				readonly="readonly" value="${modelLogin.codigo}">
+																			<label for="codigo">Código</label> 
+																			<input type="text" class="form-control" name="codigo" id="codigo"
+																				readonly="readonly" value="${mf.codigo}">
 																		</div>
 																		<div class="form-group col-md-5">
 																			<label class="control-label" for="nome">Nome</label>
 																			<div class="input-group">
-																				<input type="text" class="form-control" name="nome"
-																					id="nome" maxlength="60" required
-																					value="${modelLogin.nome}"> <span
-																					class="input-group-btn"> <a
-																					class="btn btn-info waves-effect waves-light btn-md"
-																					data-toggle="modal" href="#modalUsuario"
-																					data-target="#modalUsuario" title="Pesquisar"><i
-																						class="fa fa-search" aria-hidden="true"></i></a>
+																				<input type="text" class="form-control" name="nome" id="nome" 
+																					maxlength="60" required value="${mf.nome}"> 
+																					<span class="input-group-btn"> 
+																					<a class="btn btn-info waves-effect waves-light btn-md"
+																						data-toggle="modal" href="#modalBusca" data-target="#modalBusca" title="Pesquisar">
+																						<i class="fa fa-search" aria-hidden="true"></i>
+																					</a>
 																				</span>
 																			</div>
 																		</div>
 																		<div class="form-group col-md-4">
-																			<label for="nomefantasia">Nome
-																				Fantasia/Apelido</label> <input type="text"
-																				class="form-control" name="nomefantasia"
-																				id="nomefantasia" maxlength="60" autocomplete="off"
-																				value="${modelLogin.nomefantasia}">
+																			<label for="nome_fantasia">Nome Fantasia/Apelido</label> 
+																			<input type="text" class="form-control" name="nome_fantasia"
+																				id="nome_fantasia" maxlength="60" autocomplete="off" value="${mf.nome_fantasia}">
 																		</div>
 																		<div class="form-group col-md-2">
-																			<label for="dataNascimento">Dat. Nascimento</label> <input
-																				type="date" class="form-control"
-																				name="dataNascimento" id="dataNascimento"
-																				autocomplete="off"
-																				value="${modelLogin.dataNascimento}">
+																			<label for="cpf">CPF</label> 
+																			<input type="text" class="form-control" name="cpf" id="cpf"
+																				maxlength="25" required value="${mf.cpf}">
 																		</div>
 																		<!-- linha 2 -->
 																		<div class="form-group col-md-3">
-																			<label for="login">Login</label> <input type="text"
-																				class="form-control" name="login" id="login"
-																				maxlength="25" required value="${modelLogin.login}">
+																			<label for="data_nasc">Dat. Nascimento</label> 
+																			<input type="date" class="form-control" name="data_nasc" id="data_nasc"
+																				autocomplete="off" value="${mf.data_nasc}">
 																		</div>
 																		<div class="form-group col-md-3">
-																			<label for="senha">Senha</label> <input
-																				type="password" class="form-control" name="senha"
-																				id="senha" autocomplete="off" required
-																				value="${modelLogin.senha}">
-																		</div>
-																		<div class="form-group col-md-3">
-																			<label class="control-label" for="grupoUsuario">Grupo</label>
-																			<select class="form-control" name="grupoUsuario"
-																				id="grupoUsuario" required>
+																			<label class="control-label" for="sexo">Sexo</label>
+																			<select class="form-control" name="sexo" id="sexo" required>
 																				<option value="">Selecione</option>
-																				<option value="ADMIN"
-																					${modelLogin.grupo == 'ADMIN' ? 'selected' : ''}>Administração</option>
-																				<option value="SECRETARIO"
-																					${modelLogin.grupo == 'SECRETARIO' ? 'selected' : ''}>Secretário(a)</option>
+																				<option value="M" ${mf.sexo == 'M' ? 'selected' : ''}>Masculino</option>
+																				<option value="F" ${mf.sexo == 'F' ? 'selected' : ''}>Feminino</option>
+																			</select>
+																		</div>
+																		<div class="form-group col-md-3">
+																			<label class="control-label" for="cargo">Cargo</label>
+																			<select class="form-control" name="cargo" id="cargo" required>
+																				<option value="">Selecione</option>
+																				<option value="ADMIN" ${mf.cargo == 'ADMIN' ? 'selected' : ''}>Administração</option>
+																				<option value="SECRETARIO" ${mf.cargo == 'SECRETARIO' ? 'selected' : ''}>Secretário(a)</option>
+																				<option value="SUPORTEDEV" ${mf.cargo == 'SUPORTEDEV' ? 'selected' : ''}>Suporte/Dev</option>
 																			</select>
 																		</div>
 																		<div class="form-group col-md-3">
 																			<label for="salario">Salário</label> <input
 																				type="text" class="form-control" name="salario"
 																				id="salario" autocomplete="off"
-																				placeholder="R$ 0,00" value="${modelLogin.salario}">
+																				placeholder="R$ 0,00" value="${mf.salario}">
 																		</div>
-																		<!-- linha 3 -->
-																		<div class="form-group col-md-2">
-																			<input type="radio" name="sexo" id="M" value="M"
-																				${modelLogin.sexo == 'M' ? 'checked' : ''}>
-																			<label for="M">Masculino</label>
-																		</div>
-																		<div class="form-group col-md-2">
-																			<input type="radio" name="sexo" id="F" value="F"
-																				${modelLogin.sexo == 'F' ? 'checked' : ''}>
-																			<label for="F">Feminino</label>
-																		</div>
+																		
 																	</div>
 																</div>
 
 																<!-- TAB CONTATO ---------- -->
-																<div class="tab-pane" id="contato" role="tabpanel">
+																<div class="tab-pane" id="menu02" role="tabpanel">
 																	<div class="form-group row">
 																		<!-- linha 1 -->
 																		<div class="form-group col-md-3">
 																			<label for="fone1">Telefone 1</label> <input
 																				type="text" class="form-control" name="fone1"
-																				id="fone1" required value="${modelLogin.fone1}">
+																				id="fone1" required value="${mf.fone1}">
 																		</div>
 																		<div class="form-group col-md-3">
 																			<label for="fone2">Telefone 2</label> <input
 																				type="text" class="form-control" name="fone2"
-																				id="fone2" value="${modelLogin.fone2}">
+																				id="fone2" value="${mf.fone2}">
 																		</div>
 																		<div class="form-group col-md-3">
-																			<label for="celular1">Celular 1</label> <input
-																				type="text" class="form-control" name="celular1"
-																				id="celular1" value="${modelLogin.celular1}">
+																			<label for="cel1">Celular 1</label> <input
+																				type="text" class="form-control" name="cel1"
+																				id="cel1" value="${mf.cel1}">
 																		</div>
 																		<div class="form-group col-md-3">
-																			<label for="celular2">Celular 2</label> <input
-																				type="text" class="form-control" name="celular2"
-																				id="celular2" value="${modelLogin.celular2}">
+																			<label for="cel2">Celular 2</label> <input
+																				type="text" class="form-control" name="cel2"
+																				id="cel2" value="${mf.cel2}">
 																		</div>
 																		<!-- linha 2 -->
 																		<div class="form-group col-md-6">
 																			<label for="email">E-mail</label> <input type="email"
 																				class="form-control" name="email" id="email"
-																				required value="${modelLogin.email}">
+																				required value="${mf.email}">
 																		</div>
 																		<div class="form-group col-md-6">
 																			<label for="site">Site</label> <input type="text"
 																				class="form-control" name="site" id="site"
-																				value="${modelLogin.site}">
+																				value="${mf.site}">
 																		</div>
 																	</div>
 																</div>
 
 																<!-- TAB ENDERECO ---------- -->
-																<div class="tab-pane" id="endereco" role="tabpanel">
+																<div class="tab-pane" id="menu03" role="tabpanel">
 
 																	<div class="form-group row">
 																		<!-- linha 1 -->
@@ -198,52 +188,51 @@
 																			<label for="cep">CEP</label> <input type="text"
 																				class="form-control" name="cep" id="cep"
 																				onblur="pesquisaCep()" required
-																				value="${modelLogin.cep}">
+																				value="${mf.cep}">
 																		</div>
 																		<div class="form-group col-md-5">
 																			<label for="uf">Estado</label> <input type="text"
 																				class="form-control" name="uf" id="uf" required
-																				value="${modelLogin.uf}">
+																				value="${mf.uf}">
 																		</div>
 																		<div class="form-group col-md-5">
 																			<label for="cidade">Cidade</label> <input type="text"
 																				class="form-control" name="cidade" id="cidade"
-																				required value="${modelLogin.cidade}">
+																				required value="${mf.cidade}">
 																		</div>
 																		<!-- linha 2 -->
 																		<div class="form-group col-md-5">
 																			<label for="logradouro">Logradouro</label> <input
 																				type="text" class="form-control" name="logradouro"
-																				id="logradouro" value="${modelLogin.logradouro}">
+																				id="logradouro" value="${mf.logradouro}">
 																		</div>
 																		<div class="form-group col-md-2">
 																			<label for="numero">Número</label> <input type="text"
 																				class="form-control" name="numero" id="numero"
-																				value="${modelLogin.numero}">
+																				value="${mf.numero}">
 																		</div>
 																		<div class="form-group col-md-5">
 																			<label for="bairro">Bairro</label> <input type="text"
 																				class="form-control" name="bairro" id="bairro"
-																				required value="${modelLogin.bairro}">
+																				required value="${mf.bairro}">
 																		</div>
 																	</div>
 
 																</div>
 																<hr>
 																<!-- BOTOES ---------- -->
-																<button class="btn btn-success waves-effect waves-light"
-																	id="botaoSalvar">Salvar</button>
-																<c:if test="${modelLogin.codigo > 0}">
+																<c:if test="${mf.codigo == null}">
+																	<button class="btn btn-success waves-effect waves-light" id="botaoSalvar">Salvar</button>
+																</c:if>
+																<c:if test="${mf.codigo > 0}">
+																	<button class="btn btn-success waves-effect waves-light" id="botaoSalvar">Atualizar</button>
 																	<a type="button"
 																		class="btn btn-primary waves-effect waves-light"
 																		id="botaoLimpar"
-																		href="<%=request.getContextPath()%>/ServletUsuarioController">Limpar</a>
-																	<button type="button"
-																		class="btn btn-danger waves-effect waves-light"
-																		id="botaoRemover" data-toggle="modal"
-																		data-target="#modalDeletarUser" data-toggle="tooltip"
-																		data-placement="top" title="Deletar">
-																		<i class="fa fa-trash-o"></i>
+																		href="<%=request.getContextPath()%>/ServletFuncionario">Limpar</a>
+																	<button type="button" class="btn btn-danger waves-effect waves-light"
+																		id="botaoRemover" data-toggle="modal" data-target="#modalDeleta" data-toggle="tooltip"
+																		data-placement="top" title="Deletar"> <i class="fa fa-trash-o"></i>
 																	</button>
 																</c:if>
 																<br />
@@ -271,28 +260,26 @@
 		</div>
 	</div>
 
-	<!-- Modal BUSCAR USER -->
-	<div class="modal fade" id="modalUsuario" tabindex="-1" role="dialog"
+	<!-- Modal BUSCAR -->
+	<div class="modal fade" id="modalBusca" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header bg-info">
 					<h5 class="modal-title" id="exampleModalLongTitle">
-						<i class="fa fa-search"></i> Busca de usuário
+						<i class="fa fa-search"></i> Busca de funcionário
 					</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
 					<div class="input-group mb-3">
 						<input type="text" class="form-control"
-							placeholder="Nome do usuário" aria-label="Nome do usuário"
+							placeholder="Nome do funcionário" aria-label="Nome do funcionário"
 							id="nomeBusca" aria-describedby="basic-addon2">
 						<div class="input-group-append">
-							<button class="btn btn-primary" type="button"
-								onclick="buscarUser()">
+							<button class="btn btn-primary" type="button" onclick="buscar()">
 								<i class="fa fa-search"></i>
 							</button>
 						</div>
@@ -316,27 +303,25 @@
 		</div>
 	</div>
 
-	<!-- Modal DELETAR USER -->
-	<div class="modal fade" id="modalDeletarUser" tabindex="-1"
+	<!-- Modal DELETAR -->
+	<div class="modal fade" id="modalDeleta" tabindex="-1"
 		role="dialog" aria-labelledby="exampleModalCenterTitle"
 		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header bg-danger">
 					<h5 class="modal-title" id="exampleModalLabel">
-						<i class="fa fa-trash-o"></i> Deletar usuário
+						<i class="fa fa-trash-o"></i> Deletar funcionário
 					</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body">Você tem certeza que deseja remover
-					este usuário?</div>
+				<div class="modal-body">Você tem certeza que deseja remover	este funcionário?</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>
-					<button type="button" class="btn btn-danger"
-						onclick="criarDeleteAjax()" data-dismiss="modal">Deletar</button>
+					<button type="button" class="btn" onclick="deleteAjax()" data-dismiss="modal">Deletar</button>
 				</div>
 			</div>
 		</div>
@@ -345,17 +330,18 @@
 	<jsp:include page="javascriptfile.jsp"></jsp:include>
 
 	<script type="text/javascript">
-		$('#salario').maskMoney({
-			showSymbol : true,
-			symbol : 'R$ ',
-			decimal : ',',
-			thousands : '.'
-		});
-		$('#salario').focus();
+		
+		$('#salario').maskMoney({showSymbol : true, symbol : 'R$ ', decimal : ',', thousands : '.'});
+		
+		const formatter = new Intl.NumberFormat('pt-BR', {currency : 'BRL', minimumFractionDigits : 2});
 
+		$("#salario").val(formatter.format($("#salario").val()));
+
+		$("#salario").focus();
+		
 		// PERMITIR APENAS NUMEROS NOS CAMPOS SELECIONADOS ********************************************
-		$('#fone1, #fone2, #celular1, #celular2, #cep, #numero').keypress(
-				function(event) {
+		$('#cpf, #fone1, #fone2, #celular1, #celular2, #cep, #numero')
+				.keypress(function(event) {
 					return /\d/.test(String.fromCharCode(event.keyCode));
 				});
 
@@ -381,29 +367,32 @@
 		}
 
 		// DELETE USUARIO *****************************************************************************
-		function criarDeleteAjax() {
+		function deleteAjax() {
 
-			const urlAction = document.getElementById('formUser').action;
-			const codUser = document.getElementById('codigo').value;
+			const urlAction = document.getElementById('formFunc').action;
+			const codigo = document.getElementById('codigo').value;
 
 			$.ajax({
 				method : 'get',
 				url : urlAction,
-				data : 'codigo=' + codUser + '&acao=deletarajax',
+				data : 'codigo=' + codigo + '&acao=deletarajax',
 				success : function(response) {
+					window.location.href = urlAction;
 					document.getElementById('mensagem').textContent = response;
 				}
-			}).fail(function(xhr, status, errorThrown) {
-				alert('Erro ao deletar usuário por id: ' + xhr.responseText);
-			});
+			}).fail(
+					function(xhr, status, errorThrown) {
+						alert('Erro ao deletar funcionário por id: '
+								+ xhr.responseText);
+					});
 
 			$('#mensagem').hide();
 		}
 
-		// BUSCA DE USUARIO (MODAL) *******************************************************************
-		function buscarUser() {
+		// BUSCA (MODAL) *******************************************************************
+		function buscar() {
 			var nomeBusca = document.getElementById('nomeBusca').value;
-			const urlAction = document.getElementById('formUser').action;
+			const urlAction = document.getElementById('formFunc').action;
 
 			$
 					.ajax(
@@ -411,7 +400,7 @@
 								method : 'get',
 								url : urlAction,
 								data : 'nomeBusca=' + nomeBusca
-										+ '&acao=buscarUserAjax',
+										+ '&acao=buscarajax',
 								success : function(response) {
 
 									const json = JSON.parse(response); // divide cada usuario em um array
@@ -428,13 +417,17 @@
 									for (i = 0; i < json.length; i++) {
 										$('#tabelaRetornoBusca > tbody')
 												.append(
-														'<tr> <th>'
+														'<tr>'
+																+ '<th>'
 																+ json[i].codigo
-																+ '</th> <td>'
+																+ '</th>'
+																+ '<td>'
 																+ json[i].nome
-																+ '</td> <td><a style="cursor: pointer;" onclick="verEditar('
+																+ '</td>'
+																+ '<td><a style="cursor: pointer;" onclick="verEditar('
 																+ json[i].codigo
-																+ ')"><i class="fa fa-edit"></i></a></td></tr>')
+																+ ')"><i class="fa fa-edit"></i></a></td>'
+																+ '</tr>')
 									}
 
 									document.getElementById('totalResultado').textContent = 'Exibindo '
@@ -442,16 +435,16 @@
 								}
 							}).fail(
 							function(xhr, status, errorThrown) {
-								alert('Erro ao buscar usuário por nome: '
+								alert('Erro ao buscar funcionário por nome: '
 										+ xhr.responseText);
 							});
 		}
 
 		// VER EDITAR USUARIO APOS BUSCA (modal) ************************************************
 		function verEditar(codigo) {
-			const urlAction = document.getElementById('formUser').action;
+			const urlAction = document.getElementById('formFunc').action;
 
-			window.location.href = urlAction + '?acao=buscarEditar&codigo='
+			window.location.href = urlAction + '?acao=vereditar&codigo='
 					+ codigo;
 		}
 	</script>

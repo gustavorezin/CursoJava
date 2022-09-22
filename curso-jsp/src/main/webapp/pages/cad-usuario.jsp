@@ -63,7 +63,7 @@
 														<!-- Nav tabs -->
 														<ul class="nav nav-tabs tabs" role="tablist">
 															<li class="nav-item"><a class="nav-link active"
-																data-toggle="tab" href="#cadastro" role="tab">Principal</a>
+																data-toggle="tab" href="#menu01" role="tab">Principal</a>
 															</li>
 														</ul>
 														<form action="<%=request.getContextPath()%>/ServletUsuarioController" method="post" id="formUser">
@@ -71,7 +71,7 @@
 															<!-- Tab panes -->
 															<div class="tab-content tabs card-block">
 																<!-- TAB PRINCIPAL ---------- -->
-																<div class="tab-pane active" id="cadastro"
+																<div class="tab-pane active" id="menu01"
 																	role="tabpanel">
 																	<div class="form-group row">
 																		<!-- linha 1 -->
@@ -94,6 +94,11 @@
 																				</span>
 																			</div>
 																		</div>
+																		<div class="form-group col-md-6">
+																			<label for="email">E-mail</label> <input type="email"
+																				class="form-control" name="email" id="email"
+																				required value="${modelLogin.email}">
+																		</div>
 																		<!-- linha 2 -->
 																		<div class="form-group col-md-3">
 																			<label for="login">Login</label> <input type="text"
@@ -111,10 +116,8 @@
 																			<select class="form-control" name="grupoUsuario"
 																				id="grupoUsuario" required>
 																				<option value="">Selecione</option>
-																				<option value="ADMIN"
-																					${modelLogin.grupo == 'ADMIN' ? 'selected' : ''}>Administração</option>
-																				<option value="SECRETARIO"
-																					${modelLogin.grupo == 'SECRETARIO' ? 'selected' : ''}>Secretário(a)</option>
+																				<option value="ADMIN" ${modelLogin.grupo == 'ADMIN' ? 'selected' : ''}>Administração</option>
+																				<option value="SECRETARIO" ${modelLogin.grupo == 'SECRETARIO' ? 'selected' : ''}>Secretário(a)</option>
 																			</select>
 																		</div>
 																		<!-- linha 3 -->
@@ -123,9 +126,11 @@
 
 																<hr>
 																<!-- BOTOES ---------- -->
-																<button class="btn btn-success waves-effect waves-light"
-																	id="botaoSalvar">Salvar</button>
+																<c:if test="${modelLogin.codigo == null}">
+																	<button class="btn btn-success waves-effect waves-light" id="botaoSalvar">Salvar</button>
+																</c:if>
 																<c:if test="${modelLogin.codigo > 0}">
+																	<button class="btn btn-success waves-effect waves-light" id="botaoSalvar">Atualizar</button>
 																	<a type="button"
 																		class="btn btn-primary waves-effect waves-light"
 																		id="botaoLimpar"
@@ -138,8 +143,8 @@
 																		<i class="fa fa-trash-o"></i>
 																	</button>
 																</c:if>
-																<br />
-																<br />
+																<br/>
+																<br/>
 																<div id="mensagem">${msg}</div>
 															</div>
 														</form>
@@ -223,12 +228,10 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body">Você tem certeza que deseja remover
-					este usuário?</div>
+				<div class="modal-body">Você tem certeza que deseja remover este usuário?</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-info" data-dismiss="modal">Fechar</button>
-					<button type="button" class="btn btn-danger"
-						onclick="criarDeleteAjax()" data-dismiss="modal">Deletar</button>
+					<button type="button" class="btn btn-danger" onclick="criarDeleteAjax()" data-dismiss="modal">Deletar</button>
 				</div>
 			</div>
 		</div>
@@ -256,33 +259,34 @@
 			var cep = $('#cep').val();
 
 			$.getJSON('https://viacep.com.br/ws/' + cep + '/json/?callback=?',
-					function(dados) {
-						if (!("erro" in dados)) {
-							//Atualiza os campos com os valores da consulta.
-							$("#cep").val(dados.cep);
-							$("#uf").val(dados.uf);
-							$("#cidade").val(dados.localidade);
-							$("#logradouro").val(dados.logradouro);
-							$("#bairro").val(dados.bairro);
-						} else {
-							//CEP pesquisado não foi encontrado.
-							limpa_formulário_cep();
-							alert("CEP não encontrado.");
-						}
-					});
+				function(dados) {
+					if (!("erro" in dados)) {
+						//Atualiza os campos com os valores da consulta.
+						$("#cep").val(dados.cep);
+						$("#uf").val(dados.uf);
+						$("#cidade").val(dados.localidade);
+						$("#logradouro").val(dados.logradouro);
+						$("#bairro").val(dados.bairro);
+					} else {
+						//CEP pesquisado não foi encontrado.
+						limpa_formulário_cep();
+						alert("CEP não encontrado.");
+					}
+				});
 		}
 
 		// DELETE USUARIO *****************************************************************************
 		function criarDeleteAjax() {
 
 			const urlAction = document.getElementById('formUser').action;
-			const codUser = document.getElementById('codigo').value;
+			const codigo = document.getElementById('codigo').value;
 
 			$.ajax({
 				method : 'get',
 				url : urlAction,
-				data : 'codigo=' + codUser + '&acao=deletarajax',
+				data : 'codigo=' + codigo + '&acao=deletarajax',
 				success : function(response) {
+					window.location.href = urlAction;
 					document.getElementById('mensagem').textContent = response;
 				}
 			}).fail(function(xhr, status, errorThrown) {
@@ -297,8 +301,7 @@
 			var nomeBusca = document.getElementById('nomeBusca').value;
 			const urlAction = document.getElementById('formUser').action;
 
-			$
-					.ajax(
+			$.ajax(
 							{
 								method : 'get',
 								url : urlAction,
@@ -308,25 +311,19 @@
 
 									const json = JSON.parse(response); // divide cada usuario em um array
 
-									$('#tabelaRetornoBusca > tbody > tr')
-											.remove();
-									$('#tabelaRetornoBusca > thead > tr')
-											.remove();
+									$('#tabelaRetornoBusca > tbody > tr').remove();
+									$('#tabelaRetornoBusca > thead > tr').remove();
 
-									$('#tabelaRetornoBusca > thead')
-											.append(
-													'<tr><th class="col-sm-2">Código</th> <th>Nome</th> <th class="col-sm-2"></th></tr>')
+									$('#tabelaRetornoBusca > thead').append('<tr><th class="col-sm-2">Código</th> <th>Nome</th> <th class="col-sm-2"></th></tr>')
 
 									for (i = 0; i < json.length; i++) {
-										$('#tabelaRetornoBusca > tbody')
-												.append(
-														'<tr> <th>'
-																+ json[i].codigo
-																+ '</th> <td>'
-																+ json[i].nome
-																+ '</td> <td><a style="cursor: pointer;" onclick="verEditar('
-																+ json[i].codigo
-																+ ')"><i class="fa fa-edit"></i></a></td></tr>')
+										$('#tabelaRetornoBusca > tbody').append(
+												'<tr>' 
+													+ '<th>' + json[i].codigo + '</th>'
+													+ '<td>' + json[i].nome + '</td>'
+													+ '<td><a style="cursor: pointer;" onclick="verEditar(' + json[i].codigo + ')"><i class="fa fa-edit"></i></a></td>'
+												+ '</tr>'
+											)
 									}
 
 									document.getElementById('totalResultado').textContent = 'Exibindo '
@@ -334,8 +331,7 @@
 								}
 							}).fail(
 							function(xhr, status, errorThrown) {
-								alert('Erro ao buscar usuário por nome: '
-										+ xhr.responseText);
+								alert('Erro ao buscar usuário por nome: ' + xhr.responseText);
 							});
 		}
 
@@ -343,8 +339,7 @@
 		function verEditar(codigo) {
 			const urlAction = document.getElementById('formUser').action;
 
-			window.location.href = urlAction + '?acao=buscarEditar&codigo='
-					+ codigo;
+			window.location.href = urlAction + '?acao=buscarEditar&codigo=' + codigo;
 		}
 	</script>
 

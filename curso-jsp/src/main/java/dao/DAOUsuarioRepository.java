@@ -34,67 +34,33 @@ public class DAOUsuarioRepository {
 		
 		if(usuario.isNovo()) { // um novo usuário
 			String sql = "INSERT INTO model_login("
-					   + "nome, nomefantasia, data_nasc, login, senha, grupo, salario, sexo, "
-					   + "cep, uf, cidade, logradouro, numero, bairro, "
-					   + "fone1, fone2, celular1, celular2, email, site, cod_user) "
-					   + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+					   + "nome, email, login, senha, grupo, cod_user) "
+					   + "VALUES (?,?,?,?,?,?);";
 			
 			PreparedStatement ps = connection.prepareStatement(sql);
 			
 			ps.setObject(1, usuario.getNome());
-			ps.setObject(2, usuario.getNomefantasia());
-			ps.setObject(3, usuario.getDataNascimento());
-			ps.setObject(4, usuario.getLogin());
-			ps.setObject(5, usuario.getSenha());
-			ps.setObject(6, usuario.getGrupo());
-			ps.setObject(7, usuario.getSalario());
-			ps.setObject(8, usuario.getSexo());
-			ps.setObject(9, usuario.getCep());
-			ps.setObject(10, usuario.getUf());
-			ps.setObject(11, usuario.getCidade());
-			ps.setObject(12, usuario.getLogradouro());
-			ps.setObject(13, usuario.getNumero());
-			ps.setObject(14, usuario.getBairro());
-			ps.setObject(15, usuario.getFone1());
-			ps.setObject(16, usuario.getFone2());
-			ps.setObject(17, usuario.getCelular1());
-			ps.setObject(18, usuario.getCelular2());
-			ps.setObject(19, usuario.getEmail());
-			ps.setObject(20, usuario.getSite());
-			ps.setObject(21, userLogado);
+			ps.setObject(2, usuario.getEmail());
+			ps.setObject(3, usuario.getLogin());
+			ps.setObject(4, usuario.getSenha());
+			ps.setObject(5, usuario.getGrupo());
+			ps.setObject(6, userLogado);
 			
 			ps.execute();
 			connection.commit();
 			
 		} else { // atualizar usuário existente
 			String sql = "UPDATE model_login SET "
-					   + "nome=?, nomefantasia=?, data_nasc=?, login=?, senha=?, grupo=?, salario=?, sexo=?, "
-					   + "cep=?, uf=?, cidade=?, logradouro=?, numero=?, bairro=?, "
-					   + "fone1=?, fone2=?, celular1=?, celular2=?, email=?, site=? "
+					   + "nome=?, email=?, login=?, senha=?, grupo=? "
 					   + "WHERE codigo = " + usuario.getCodigo() + ";";
 			
 			PreparedStatement ps = connection.prepareStatement(sql);
 			
 			ps.setObject(1, usuario.getNome());
-			ps.setObject(2, usuario.getNomefantasia());
-			ps.setObject(3, usuario.getDataNascimento());
-			ps.setObject(4, usuario.getLogin());
-			ps.setObject(5, usuario.getSenha());
-			ps.setObject(6, usuario.getGrupo());
-			ps.setObject(7, usuario.getSalario());
-			ps.setObject(8, usuario.getSexo());
-			ps.setObject(9, usuario.getCep());
-			ps.setObject(10, usuario.getUf());
-			ps.setObject(11, usuario.getCidade());
-			ps.setObject(12, usuario.getLogradouro());
-			ps.setObject(13, usuario.getNumero());
-			ps.setObject(14, usuario.getBairro());
-			ps.setObject(15, usuario.getFone1());
-			ps.setObject(16, usuario.getFone2());
-			ps.setObject(17, usuario.getCelular1());
-			ps.setObject(18, usuario.getCelular2());
-			ps.setObject(19, usuario.getEmail());
-			ps.setObject(20, usuario.getSite());
+			ps.setObject(2, usuario.getEmail());
+			ps.setObject(3, usuario.getLogin());
+			ps.setObject(4, usuario.getSenha());
+			ps.setObject(5, usuario.getGrupo());
 			
 			ps.executeUpdate();
 			connection.commit();
@@ -118,26 +84,11 @@ public class DAOUsuarioRepository {
 		if (rs.next()) { // se tem mais uma linha na tabela
 			modelLogin.setCodigo(rs.getInt("codigo"));
 			modelLogin.setNome(rs.getString("nome"));
-			modelLogin.setNomefantasia(rs.getString("nomefantasia"));
-			modelLogin.setDataNascimento(rs.getDate("data_nasc"));
+			modelLogin.setEmail(rs.getString("email"));
 			modelLogin.setLogin(rs.getString("login"));
 			modelLogin.setSenha(rs.getString("senha"));
 			modelLogin.setUseradmin(rs.getBoolean("useradmin"));
 			modelLogin.setGrupo(rs.getString("grupo"));
-			modelLogin.setSalario(rs.getDouble("salario"));
-			modelLogin.setSexo(rs.getString("sexo"));
-			modelLogin.setCep(rs.getString("cep"));
-			modelLogin.setUf(rs.getString("uf"));
-			modelLogin.setCidade(rs.getString("cidade"));
-			modelLogin.setLogradouro(rs.getString("logradouro"));
-			modelLogin.setNumero(rs.getString("numero"));
-			modelLogin.setBairro(rs.getString("bairro"));
-			modelLogin.setFone1(rs.getString("fone1"));
-			modelLogin.setFone2(rs.getString("fone2"));
-			modelLogin.setCelular1(rs.getString("celular1"));
-			modelLogin.setCelular2(rs.getString("celular2"));
-			modelLogin.setEmail(rs.getString("email"));
-			modelLogin.setSite(rs.getString("site"));
 			}
 		return modelLogin;
 	}
@@ -158,26 +109,11 @@ public class DAOUsuarioRepository {
 		if (rs.next()) { // se tem mais uma linha na tabela
 			modelLogin.setCodigo(rs.getInt("codigo"));
 			modelLogin.setNome(rs.getString("nome"));
-			modelLogin.setNomefantasia(rs.getString("nomefantasia"));
-			modelLogin.setDataNascimento(rs.getDate("data_nasc"));
+			modelLogin.setEmail(rs.getString("email"));
 			modelLogin.setLogin(rs.getString("login"));
 			modelLogin.setSenha(rs.getString("senha"));
 			modelLogin.setUseradmin(rs.getBoolean("useradmin"));
 			modelLogin.setGrupo(rs.getString("grupo"));
-			modelLogin.setSalario(rs.getDouble("salario"));
-			modelLogin.setSexo(rs.getString("sexo"));
-			modelLogin.setCep(rs.getString("cep"));
-			modelLogin.setUf(rs.getString("uf"));
-			modelLogin.setCidade(rs.getString("cidade"));
-			modelLogin.setLogradouro(rs.getString("logradouro"));
-			modelLogin.setNumero(rs.getString("numero"));
-			modelLogin.setBairro(rs.getString("bairro"));
-			modelLogin.setFone1(rs.getString("fone1"));
-			modelLogin.setFone2(rs.getString("fone2"));
-			modelLogin.setCelular1(rs.getString("celular1"));
-			modelLogin.setCelular2(rs.getString("celular2"));
-			modelLogin.setEmail(rs.getString("email"));
-			modelLogin.setSite(rs.getString("site"));
 		}
 		return modelLogin;
 	}
@@ -198,26 +134,11 @@ public class DAOUsuarioRepository {
 		if (rs.next()) { // se tem mais uma linha na tabela
 			modelLogin.setCodigo(rs.getInt("codigo"));
 			modelLogin.setNome(rs.getString("nome"));
-			modelLogin.setNomefantasia(rs.getString("nomefantasia"));
-			modelLogin.setDataNascimento(rs.getDate("data_nasc"));
+			modelLogin.setEmail(rs.getString("email"));
 			modelLogin.setLogin(rs.getString("login"));
 			modelLogin.setSenha(rs.getString("senha"));
 			modelLogin.setUseradmin(rs.getBoolean("useradmin"));
 			modelLogin.setGrupo(rs.getString("grupo"));
-			modelLogin.setSalario(rs.getDouble("salario"));
-			modelLogin.setSexo(rs.getString("sexo"));
-			modelLogin.setCep(rs.getString("cep"));
-			modelLogin.setUf(rs.getString("uf"));
-			modelLogin.setCidade(rs.getString("cidade"));
-			modelLogin.setLogradouro(rs.getString("logradouro"));
-			modelLogin.setNumero(rs.getString("numero"));
-			modelLogin.setBairro(rs.getString("bairro"));
-			modelLogin.setFone1(rs.getString("fone1"));
-			modelLogin.setFone2(rs.getString("fone2"));
-			modelLogin.setCelular1(rs.getString("celular1"));
-			modelLogin.setCelular2(rs.getString("celular2"));
-			modelLogin.setEmail(rs.getString("email"));
-			modelLogin.setSite(rs.getString("site"));
 		}
 		return modelLogin;
 	}
@@ -239,25 +160,10 @@ public class DAOUsuarioRepository {
 			ModelLogin modelLogin = new ModelLogin();
 			modelLogin.setCodigo(rs.getInt("codigo"));
 			modelLogin.setNome(rs.getString("nome"));
-			modelLogin.setNomefantasia(rs.getString("nomefantasia"));
-			modelLogin.setDataNascimento(rs.getDate("data_nasc"));
+			modelLogin.setEmail(rs.getString("email"));
 			modelLogin.setLogin(rs.getString("login"));
 			modelLogin.setUseradmin(rs.getBoolean("useradmin"));
 			modelLogin.setGrupo(rs.getString("grupo"));
-			modelLogin.setSalario(rs.getDouble("salario"));
-			modelLogin.setSexo(rs.getString("sexo"));
-			modelLogin.setCep(rs.getString("cep"));
-			modelLogin.setUf(rs.getString("uf"));
-			modelLogin.setCidade(rs.getString("cidade"));
-			modelLogin.setLogradouro(rs.getString("logradouro"));
-			modelLogin.setNumero(rs.getString("numero"));
-			modelLogin.setBairro(rs.getString("bairro"));
-			modelLogin.setFone1(rs.getString("fone1"));
-			modelLogin.setFone2(rs.getString("fone2"));
-			modelLogin.setCelular1(rs.getString("celular1"));
-			modelLogin.setCelular2(rs.getString("celular2"));
-			modelLogin.setEmail(rs.getString("email"));
-			modelLogin.setSite(rs.getString("site"));
 			// modelLogin.setSenha(resultado.getString("senha")); não precisa
 			
 			retornoBusca.add(modelLogin);
@@ -280,25 +186,10 @@ public class DAOUsuarioRepository {
 			ModelLogin modelLogin = new ModelLogin();
 			modelLogin.setCodigo(rs.getInt("codigo"));
 			modelLogin.setNome(rs.getString("nome"));
-			modelLogin.setNomefantasia(rs.getString("nomefantasia"));
-			modelLogin.setDataNascimento(rs.getDate("data_nasc"));
+			modelLogin.setEmail(rs.getString("email"));
 			modelLogin.setLogin(rs.getString("login"));
 			modelLogin.setUseradmin(rs.getBoolean("useradmin"));
 			modelLogin.setGrupo(rs.getString("grupo"));
-			modelLogin.setSalario(rs.getDouble("salario"));
-			modelLogin.setSexo(rs.getString("sexo"));
-			modelLogin.setCep(rs.getString("cep"));
-			modelLogin.setUf(rs.getString("uf"));
-			modelLogin.setCidade(rs.getString("cidade"));
-			modelLogin.setLogradouro(rs.getString("logradouro"));
-			modelLogin.setNumero(rs.getString("numero"));
-			modelLogin.setBairro(rs.getString("bairro"));
-			modelLogin.setFone1(rs.getString("fone1"));
-			modelLogin.setFone2(rs.getString("fone2"));
-			modelLogin.setCelular1(rs.getString("celular1"));
-			modelLogin.setCelular2(rs.getString("celular2"));
-			modelLogin.setEmail(rs.getString("email"));
-			modelLogin.setSite(rs.getString("site"));
 			// modelLogin.setSenha(resultado.getString("senha")); não precisa
 			
 			retornoBusca.add(modelLogin);
@@ -308,11 +199,11 @@ public class DAOUsuarioRepository {
 	}
 	
 	// DELETE USUÁRIO *****************************************************************************
-	public void deletarUsuario(String codUser) throws Exception {
+	public void deletarUsuario(String codigo) throws Exception {
 		String sql = "DELETE FROM model_login WHERE codigo = ? AND useradmin IS false";
 		PreparedStatement ps = connection.prepareStatement(sql);
 		
-		ps.setInt(1, Integer.valueOf(codUser));
+		ps.setInt(1, Integer.valueOf(codigo));
 		
 		ps.executeUpdate();
 		connection.commit();

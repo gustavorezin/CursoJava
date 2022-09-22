@@ -218,6 +218,7 @@
 				url : urlAction,
 				data : 'codigo=' + codigo + '&acao=deletarajax',
 				success : function(response) {
+					window.location.href = urlAction;
 					document.getElementById('mensagem').textContent = response;
 				}
 			}).fail(function(xhr, status, errorThrown) {
