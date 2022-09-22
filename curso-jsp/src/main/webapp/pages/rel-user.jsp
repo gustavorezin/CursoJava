@@ -34,7 +34,7 @@
 							<div class="page-block">
 								<div class="row align-items-center">
 									<div class="col-md-8">
-										<h2 class="page-title">###</h2>
+										<h2 class="page-title">Relatório de usuário</h2>
 									</div>
 									<div class="col-md-4">
 										<ul class="breadcrumb-title">
@@ -85,26 +85,31 @@
 																<button class="btn btn-success waves-effect waves-light" id="botaoGerar">Gerar</button>
 															</div>
 														</form>
-														<div class="table-responsive">
-															<table class="table table-hover"
-																id="tabelaRetornoBusca">
-																<thead>
-																	<tr>
-																		<th class="col-sm-2">Código</th>
-																		<th>Nome</th>
-																		<th class="col-sm-2"></th>
-																	</tr>
-																</thead>
-																<tbody>
-																  <c:forEach items="listaUser" var="ml">
-																  	<tr>
-																  		
-																  		<td><c:out value="${ml.nome}"></c:out></td>
-																  	</tr>
-																  </c:forEach>
-																</tbody>
-															</table>
-														</div>
+														<c:if test="${listaUser != null}">
+															<div class="table-responsive">
+																<table class="table table-hover"
+																	id="tabelaRetornoBusca">
+																	<thead>
+																		<tr>
+																			<th class="col-sm-2">Código</th>
+																			<th>Nome</th>
+																			<th>Email</th>
+																			<th>Login</th>
+																		</tr>
+																	</thead>
+																	<tbody>
+																	  <c:forEach items="${listaUser}" var="ml">
+																	  	<tr>
+																	  		<td><c:out value="${ml.codigo}"></c:out></td>
+																	  		<td><c:out value="${ml.nome}"></c:out></td>
+																	  		<td><c:out value="${ml.email}"></c:out></td>
+																	  		<td><c:out value="${ml.login}"></c:out></td>
+																	  	</tr>
+																	  </c:forEach>
+																	</tbody>
+																</table>
+															</div>
+														</c:if>
 													</div>
 												</div>
 											</div>

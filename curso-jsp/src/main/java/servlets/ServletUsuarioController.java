@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.ModelLogin;
+import util.ReportUtil;
 
 @WebServlet(urlPatterns = {"/ServletUsuarioController"})
 public class ServletUsuarioController extends ServletGenericUtil {
@@ -55,7 +56,6 @@ public class ServletUsuarioController extends ServletGenericUtil {
  			
 			// IMPRIMIR NA TELA ----------	
 			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("imprimirRelatorioHtml")) {
-				System.out.println("entrou aqui");
 				
 				String nome = request.getParameter("nome");
 				 
@@ -68,34 +68,29 @@ public class ServletUsuarioController extends ServletGenericUtil {
 				request.setAttribute("nome", nome);
 				request.getRequestDispatcher("pages/rel-user.jsp").forward(request, response);
 				 
-			 } /*else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("imprimirRelatorioPDF")) {
+			 } else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("imprimirRelatorioPDF")) {
 				 
-				 String dataInicial = request.getParameter("dataInicial");
-				 String dataFinal = request.getParameter("dataFinal");
+				 String nome = request.getParameter("nome");
 				 
 				 List<ModelLogin> modelLogins = null;
 				 
-				 if (dataInicial == null || dataInicial.isEmpty() 
-						 && dataFinal == null || dataFinal.isEmpty()) {
-					 
-					 modelLogins = dao.consultaUsuarioListRel(super.getUserLogado(request));
-					 
-				 }else {
-					 
-					 modelLogins = dao.consultaUsuarioListRel(super.getUserLogado(request), dataInicial, dataFinal);
-				 }
+				 if (nome == null || nome.isEmpty()) {
+						request.setAttribute("listaUser", dao.buscaUserList());
+					}else {
+						request.setAttribute("listaUser", dao.buscaUserList(nome));
+					}
 				 
 				 
 				 HashMap<String, Object> params = new HashMap<String, Object>();
 				 params.put("PARAM_SUB_REPORT", request.getServletContext().getRealPath("relatorio") + File.separator);
 				 
-				 byte[] relatorio = new ReportUtil().geraReltorioPDF(modelLogins, "resl-user-jsp", params ,request.getServletContext());
+				 byte[] relatorio = new ReportUtil().geraReltorioPDF(modelLogins, "rel-user-jsp", params ,request.getServletContext());
 				 
 				 
 				 response.setHeader("Content-Disposition", "attachment;filename=arquivo.pdf");
 				 response.getOutputStream().write(relatorio);
 				 
-			 }*/else {
+			 }else {
 				request.getRequestDispatcher("pages/cad-usuario.jsp").forward(request, response);
 			}
 		} catch (Exception e) {
