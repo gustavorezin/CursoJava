@@ -67,32 +67,31 @@ public class ServletUsuarioController extends ServletGenericUtil {
 				 
 				request.setAttribute("nome", nome);
 				request.getRequestDispatcher("pages/rel-user.jsp").forward(request, response);
+			
+			// IMPRIMIR PDF ----------		
+			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("imprimirRelatorioPDF")) {
 				 
-			 } else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("imprimirRelatorioPDF")) {
+				String nome = request.getParameter("nome");
 				 
-				 String nome = request.getParameter("nome");
+				List<ModelLogin> mlList = null;
 				 
-				 List<ModelLogin> modelLogins = null;
+				if (nome == null || nome.isEmpty()) {
+					mlList = dao.buscaUserList();
+				}else {
+					mlList = dao.buscaUserList(nome);
+				}
+				
+				HashMap<String, Object> params = new HashMap<String, Object>();
+				params.put("PARAM_SUB_REPORT", request.getServletContext().getRealPath("relatorio") + File.separator);
 				 
-				 if (nome == null || nome.isEmpty()) {
-						request.setAttribute("listaUser", dao.buscaUserList());
-					}else {
-						request.setAttribute("listaUser", dao.buscaUserList(nome));
-					}
+				byte[] relatorio = new ReportUtil().geraReltorioPDF(mlList, "rel_usuario", params ,request.getServletContext());
 				 
-				 
-				 HashMap<String, Object> params = new HashMap<String, Object>();
-				 params.put("PARAM_SUB_REPORT", request.getServletContext().getRealPath("relatorio") + File.separator);
-				 
-				 byte[] relatorio = new ReportUtil().geraReltorioPDF(modelLogins, "rel-user-jsp", params ,request.getServletContext());
-				 
-				 
-				 response.setHeader("Content-Disposition", "attachment;filename=arquivo.pdf");
-				 response.getOutputStream().write(relatorio);
+				response.setHeader("Content-Disposition", "attachment;filename=arquivo.pdf");
+				response.getOutputStream().write(relatorio);
 				 
 			 }else {
 				request.getRequestDispatcher("pages/cad-usuario.jsp").forward(request, response);
-			}
+			 }
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("msg", e.getMessage());

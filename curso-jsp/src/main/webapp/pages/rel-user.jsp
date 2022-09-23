@@ -67,7 +67,7 @@
 															</li>
 														</ul>
 														<form action="<%=request.getContextPath()%>/ServletUsuarioController" method="get" id="formUser">
-															<input type="hidden" name="acao" id="acao" value="imprimirRelatorioHtml"> <!-- ação para pegar no GET do servlet -->
+															<input type="hidden" name="acao" id="acaoImprimirRelTipo" value="imprimirRelatorioHtml"> <!-- ação para pegar no GET do servlet -->
 															<!-- Tab panes -->
 															<div class="tab-content tabs card-block">
 																<!-- TAB PRINCIPAL ---------- -->
@@ -82,7 +82,8 @@
 																</div>
 																<hr>
 																<!-- BOTOES ---------- -->
-																<button class="btn btn-success waves-effect waves-light" id="botaoGerar">Gerar</button>
+																<button type="button" class="btn btn-success waves-effect waves-light" 
+																	data-toggle="modal" data-target="#modalRelatorio">Gerar</button>
 															</div>
 														</form>
 														<c:if test="${listaUser != null}">
@@ -114,9 +115,6 @@
 												</div>
 											</div>
 										</div>
-
-
-
 
 										<!-- FIM - CONTEÚDO DA PÁGINA ********************************* -->
 
@@ -150,8 +148,11 @@
 				<div class="modal-body">
 					<h6>Selecione uma opção para impressão</h6>
 					<hr>
+					<button type="button" onclick="imprimirPdf()" class="btn btn-danger waves-effect waves-light">Imprimir PDF</button> <br> <br>
+					<button type="button" onclick="imprimirHtml()" class="btn btn-secondary waves-effect waves-light">Imprimir na tela</button>
+					<!--  
 					<button type="button" onclick="imprimirPdf()" class="btn btn-danger">Imprimir PDF</button> <br> <br>
-					<button type="button" onclick="imprimirHtml()" class="btn btn-secondary">Imprimir na tela</button>
+					<button type="button" onclick="imprimirHtml()" class="btn btn-secondary">Imprimir na tela</button>-->
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn" data-dismiss="modal">Fechar</button>
@@ -163,17 +164,16 @@
 	<jsp:include page="javascriptfile.jsp"></jsp:include>
 
 	<script type="text/javascript">
-	/*
+	
 	function imprimirPdf() {
-	    document.getElementById("acaoTipoRel").value = 'imprimirRelatorioPDF';
+	    document.getElementById("acaoImprimirRelTipo").value = 'imprimirRelatorioPDF';
 	    $("#formUser").submit();
-	    return false;
 	}
 
 	function imprimirHtml() {
-	    document.getElementById("acaoTipoRel").value = 'imprimirRelatorioHtml';
+	    document.getElementById("acaoImprimirRelTipo").value = 'imprimirRelatorioHtml';
 	    $("#formUser").submit();
-	}*/
+	}
 
 	</script>
 
