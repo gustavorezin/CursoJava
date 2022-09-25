@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 3.6.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rel_usuario" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rel_usuario" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="ff65227d-9500-4815-a637-79115ce45ea5">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<queryString>
 		<![CDATA[]]>
@@ -30,105 +30,121 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="20" splitType="Stretch">
+		<band height="36" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="280" height="20"/>
-				<textElement lineSpacing="Single">
+				<reportElement x="0" y="0" width="280" height="20" uuid="8edc3628-74fd-4a5c-a20b-1ad5e0b85f64"/>
+				<textElement markup="styled">
 					<font fontName="SansSerif" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Relatório de Usuário]]></text>
+				<text><![CDATA[<style pdfFontName="Helvetica-Bold">Relatório de Usuário</style>]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy HH:mm ">
-				<reportElement x="430" y="0" width="125" height="11"/>
-				<textElement textAlignment="Right" lineSpacing="Single">
-					<font size="8" isBold="true"/>
+				<reportElement x="490" y="0" width="65" height="11" uuid="3f05af9d-a16d-43b5-8d85-51a8325763a1"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression class=""><![CDATA["Impresso em: " + new java.util.Date()]]></textFieldExpression>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement x="390" y="0" width="100" height="11" uuid="f57d91f8-0601-42d7-aebb-feeef34d4b25"/>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="SansSerif" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Impresso em: ]]></text>
+			</staticText>
 		</band>
 	</title>
 	<pageHeader>
 		<band height="28" splitType="Stretch">
 			<staticText>
-				<reportElement x="10" y="10" width="40" height="17"/>
-				<textElement verticalAlignment="Middle" lineSpacing="Single">
+				<reportElement x="6" y="10" width="30" height="17" uuid="ee85b3c1-27c5-4b16-8480-63347c559558"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
 					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Código]]></text>
+				<text><![CDATA[<style pdfFontName="Helvetica-Bold">Cód.</style>]]></text>
 			</staticText>
 			<line>
-				<reportElement x="0" y="27" width="555" height="1"/>
+				<reportElement x="0" y="27" width="555" height="1" uuid="447d7278-dfb1-4883-8082-ad0690291b99"/>
 			</line>
 			<staticText>
-				<reportElement x="60" y="10" width="40" height="17"/>
-				<textElement verticalAlignment="Middle" lineSpacing="Single">
+				<reportElement x="60" y="10" width="40" height="17" uuid="9aefcd85-93f8-4281-a137-f3e9d38ebc5e"/>
+				<textElement verticalAlignment="Middle" markup="styled">
 					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Nome]]></text>
+				<text><![CDATA[<style pdfFontName="Helvetica-Bold">Nome</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="240" y="10" width="40" height="17"/>
-				<textElement verticalAlignment="Middle" lineSpacing="Single">
+				<reportElement x="240" y="10" width="40" height="17" uuid="65efacb6-9157-449b-bbf4-e429e93d05a7"/>
+				<textElement verticalAlignment="Middle" markup="styled">
 					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Email]]></text>
+				<text><![CDATA[<style pdfFontName="Helvetica-Bold">Email</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="410" y="10" width="40" height="17"/>
-				<textElement verticalAlignment="Middle" lineSpacing="Single">
+				<reportElement x="410" y="10" width="40" height="17" uuid="3219ab7b-6966-4277-aed8-5a6f2d088e60"/>
+				<textElement verticalAlignment="Middle" markup="styled">
 					<font fontName="SansSerif" size="10" isBold="true"/>
+					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Login]]></text>
+				<text><![CDATA[<style pdfFontName="Helvetica-Bold">Login</style>]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
 	<detail>
 		<band height="20" splitType="Stretch">
 			<textField isBlankWhenNull="true">
-				<reportElement x="60" y="5" width="140" height="15"/>
-				<textElement lineSpacing="Single"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{nome}]]></textFieldExpression>
+				<reportElement x="60" y="5" width="140" height="15" uuid="18fb915d-61e7-414d-8441-84e027c71751"/>
+				<textElement>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="10" y="5" width="40" height="15"/>
-				<textElement lineSpacing="Single"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{codigo}]]></textFieldExpression>
+				<reportElement x="6" y="5" width="30" height="15" uuid="94f2b064-c9dd-4ff6-a15e-50f14bee41ce"/>
+				<textElement textAlignment="Center">
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="240" y="5" width="150" height="15"/>
-				<textElement lineSpacing="Single"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{email}]]></textFieldExpression>
+				<reportElement x="240" y="5" width="150" height="15" uuid="e915a03e-a829-49c2-ae30-b4827563aebc"/>
+				<textElement>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="410" y="5" width="100" height="15"/>
-				<textElement lineSpacing="Single"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{login}]]></textFieldExpression>
+				<reportElement x="410" y="5" width="100" height="15" uuid="bd1eaa87-8f05-40a3-bb6f-cbd469ee6a00"/>
+				<textElement>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{login}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<lastPageFooter>
 		<band height="15">
 			<line>
-				<reportElement x="0" y="0" width="555" height="1"/>
+				<reportElement x="0" y="0" width="555" height="1" uuid="a9e1debc-dca8-415d-92e4-a59c8f13f947"/>
 			</line>
-			<textField evaluationTime="Report">
-				<reportElement x="530" y="1" width="15" height="14"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
-					<font size="6"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
-			</textField>
 			<textField>
-				<reportElement x="445" y="1" width="85" height="14"/>
-				<textElement textAlignment="Right" verticalAlignment="Middle" lineSpacing="Single">
-					<font size="8"/>
+				<reportElement x="460" y="0" width="85" height="14" uuid="b997174d-0d57-4d24-888c-384da86cf126"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8"/>
+					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$V{PAGE_NUMBER} + " de"]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER} + " de " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="10" y="0" width="130" height="15"/>
-				<textElement verticalAlignment="Middle" lineSpacing="Single">
-					<font size="8"/>
+				<reportElement mode="Transparent" x="10" y="0" width="130" height="15" uuid="0a9c314d-390e-4765-b7a0-7556b55283c2"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="SansSerif" size="8" isBold="false"/>
+					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[Gerado por gustavorezin]]></text>
 			</staticText>

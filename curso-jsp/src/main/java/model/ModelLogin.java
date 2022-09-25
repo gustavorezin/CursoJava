@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class ModelLogin implements Serializable{
 
-	private static final long serialVersionUID = 1L; // compilação das classes
+	private static final long serialVersionUID = 1L; // compilaï¿½ï¿½o das classes
 	
 	private Integer codigo;
 	private String nome;
@@ -14,12 +14,12 @@ public class ModelLogin implements Serializable{
 	private String grupo;
 	private Boolean useradmin;
 	
-	public boolean isNovo() { // Verifica se é um novo usuário
+	public boolean isNovo() { // Verifica se Ã© um novo usuï¿½rio
 		if (this.codigo == null) {
-			return true; // inserir um novo usuário
+			return true; // inserir um novo usuï¿½rio
 			
 		} else if (this.codigo != null && this.codigo > 0) {
-			return false; // atualizar um antigo usuário
+			return false; // atualizar um antigo usuï¿½rio
 		}
 		return codigo == null;
 	}
