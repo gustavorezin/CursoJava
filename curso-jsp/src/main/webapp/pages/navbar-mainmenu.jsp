@@ -85,6 +85,13 @@
 			                            <span class="pcoded-mcaret"></span>
 			                        </a>
 			                    </li>
+			                    <li class="">
+		                        <a href="<%= request.getContextPath() %>/pages/rel-func.jsp" class="waves-effect waves-dark">
+	                            <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+	                            <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Funcionário</span>
+	                            <span class="pcoded-mcaret"></span>
+		                        </a>
+			                    </li>
 		                	</ul>
 		            	</li>	
 	                </ul>  

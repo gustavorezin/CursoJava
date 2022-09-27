@@ -54,20 +54,6 @@ public class ServletUsuarioController extends ServletGenericUtil {
 				request.setAttribute("modelLogin", usuario); // atributo que vai preencher a tela
 				request.getRequestDispatcher("pages/cad-usuario.jsp").forward(request, response);
  			
-			// IMPRIMIR NA TELA ----------	
-			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("imprimirRelatorioHtml")) {
-				
-				String nome = request.getParameter("nome");
-				 
-				if (nome == null || nome.isEmpty()) {
-					request.setAttribute("listaUser", dao.buscaUserList());
-				}else {
-					request.setAttribute("listaUser", dao.buscaUserList(nome));
-				}
-				 
-				request.setAttribute("nome", nome);
-				request.getRequestDispatcher("pages/rel-user.jsp").forward(request, response);
-			
 			// IMPRIMIR PDF ----------		
 			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("imprimirRelatorioPDF")) {
 				 
@@ -87,8 +73,22 @@ public class ServletUsuarioController extends ServletGenericUtil {
 				byte[] relatorio = new ReportUtil().geraReltorioPDF(mlList, "rel_usuario", params ,request.getServletContext());
 				 
 				response.setHeader("Content-Disposition", "attachment;filename=arquivo.pdf");
-				response.getOutputStream().write(relatorio);
+				response.getOutputStream().write(relatorio);	
+				
+			// IMPRIMIR NA TELA ----------	
+			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("imprimirRelatorioHtml")) {
+				
+				String nome = request.getParameter("nome");
 				 
+				if (nome == null || nome.isEmpty()) {
+					request.setAttribute("listaUser", dao.buscaUserList());
+				}else {
+					request.setAttribute("listaUser", dao.buscaUserList(nome));
+				}
+				 
+				request.setAttribute("nome", nome);
+				request.getRequestDispatcher("pages/rel-user.jsp").forward(request, response);
+			
 			 }else {
 				request.getRequestDispatcher("pages/cad-usuario.jsp").forward(request, response);
 			 }

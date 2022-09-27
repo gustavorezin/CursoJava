@@ -1,27 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 3.6.1  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rel_usuario" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rel_func" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
-	<field name="senha" class="java.lang.String">
-		<fieldDescription><![CDATA[senha]]></fieldDescription>
+	<field name="fone1" class="java.lang.String">
+		<fieldDescription><![CDATA[fone1]]></fieldDescription>
+	</field>
+	<field name="cidade" class="java.lang.String">
+		<fieldDescription><![CDATA[cidade]]></fieldDescription>
 	</field>
 	<field name="codigo" class="java.lang.Integer">
 		<fieldDescription><![CDATA[codigo]]></fieldDescription>
 	</field>
-	<field name="useradmin" class="java.lang.Boolean">
-		<fieldDescription><![CDATA[useradmin]]></fieldDescription>
+	<field name="fone2" class="java.lang.String">
+		<fieldDescription><![CDATA[fone2]]></fieldDescription>
 	</field>
-	<field name="grupo" class="java.lang.String">
-		<fieldDescription><![CDATA[grupo]]></fieldDescription>
+	<field name="numero" class="java.lang.String">
+		<fieldDescription><![CDATA[numero]]></fieldDescription>
+	</field>
+	<field name="bairro" class="java.lang.String">
+		<fieldDescription><![CDATA[bairro]]></fieldDescription>
+	</field>
+	<field name="cel2" class="java.lang.String">
+		<fieldDescription><![CDATA[cel2]]></fieldDescription>
+	</field>
+	<field name="salario" class="java.lang.Double">
+		<fieldDescription><![CDATA[salario]]></fieldDescription>
+	</field>
+	<field name="cel1" class="java.lang.String">
+		<fieldDescription><![CDATA[cel1]]></fieldDescription>
 	</field>
 	<field name="nome" class="java.lang.String">
 		<fieldDescription><![CDATA[nome]]></fieldDescription>
 	</field>
-	<field name="login" class="java.lang.String">
-		<fieldDescription><![CDATA[login]]></fieldDescription>
+	<field name="data_nasc" class="java.sql.Date">
+		<fieldDescription><![CDATA[data_nasc]]></fieldDescription>
+	</field>
+	<field name="cep" class="java.lang.String">
+		<fieldDescription><![CDATA[cep]]></fieldDescription>
+	</field>
+	<field name="uf" class="java.lang.String">
+		<fieldDescription><![CDATA[uf]]></fieldDescription>
+	</field>
+	<field name="site" class="java.lang.String">
+		<fieldDescription><![CDATA[site]]></fieldDescription>
+	</field>
+	<field name="logradouro" class="java.lang.String">
+		<fieldDescription><![CDATA[logradouro]]></fieldDescription>
+	</field>
+	<field name="cpf" class="java.lang.String">
+		<fieldDescription><![CDATA[cpf]]></fieldDescription>
+	</field>
+	<field name="cargo" class="java.lang.String">
+		<fieldDescription><![CDATA[cargo]]></fieldDescription>
+	</field>
+	<field name="sexo" class="java.lang.String">
+		<fieldDescription><![CDATA[sexo]]></fieldDescription>
+	</field>
+	<field name="nome_fantasia" class="java.lang.String">
+		<fieldDescription><![CDATA[nome_fantasia]]></fieldDescription>
 	</field>
 	<field name="email" class="java.lang.String">
 		<fieldDescription><![CDATA[email]]></fieldDescription>
@@ -36,7 +75,7 @@
 				<textElement lineSpacing="Single" markup="styled">
 					<font fontName="SansSerif" size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[<style pdfFontName="Helvetica-Bold">Relatório de Usuário</style>]]></text>
+				<text><![CDATA[<style pdfFontName="Helvetica-Bold">Relatório de Funcionário</style>]]></text>
 			</staticText>
 			<textField pattern="dd/MM/yyyy HH:mm ">
 				<reportElement x="490" y="0" width="65" height="11"/>
@@ -55,7 +94,7 @@
 		</band>
 	</title>
 	<pageHeader>
-		<band height="28" splitType="Stretch">
+		<band height="32" splitType="Stretch">
 			<staticText>
 				<reportElement x="6" y="10" width="30" height="17"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single" markup="styled">
@@ -74,18 +113,25 @@
 				<text><![CDATA[<style pdfFontName="Helvetica-Bold">Nome</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="240" y="10" width="40" height="17"/>
+				<reportElement x="210" y="10" width="40" height="17"/>
 				<textElement verticalAlignment="Middle" lineSpacing="Single" markup="styled">
 					<font fontName="SansSerif" size="10" isBold="true"/>
 				</textElement>
 				<text><![CDATA[<style pdfFontName="Helvetica-Bold">Email</style>]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="410" y="10" width="40" height="17"/>
+				<reportElement x="370" y="10" width="70" height="17"/>
 				<textElement verticalAlignment="Middle" lineSpacing="Single" markup="styled">
 					<font fontName="SansSerif" size="10" isBold="true"/>
 				</textElement>
-				<text><![CDATA[<style pdfFontName="Helvetica-Bold">Login</style>]]></text>
+				<text><![CDATA[<style pdfFontName="Helvetica-Bold">Cargo</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="460" y="10" width="70" height="17"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single" markup="styled">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style pdfFontName="Helvetica-Bold">Salário</style>]]></text>
 			</staticText>
 		</band>
 	</pageHeader>
@@ -102,14 +148,19 @@
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{codigo}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="240" y="5" width="150" height="15"/>
+				<reportElement x="210" y="5" width="150" height="15"/>
 				<textElement lineSpacing="Single"/>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{email}]]></textFieldExpression>
 			</textField>
 			<textField isBlankWhenNull="true">
-				<reportElement x="410" y="5" width="100" height="15"/>
+				<reportElement x="370" y="5" width="80" height="15"/>
 				<textElement lineSpacing="Single"/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$F{login}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{cargo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤#,##0.##;¤-#,##0.##" isBlankWhenNull="true">
+				<reportElement x="460" y="5" width="80" height="15"/>
+				<textElement lineSpacing="Single"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{salario}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

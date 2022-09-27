@@ -1,11 +1,15 @@
 package servlets;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.List;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import bean.BEANGraficoSalario;
 
 import dao.DAOFuncionario;
 import jakarta.servlet.ServletException;
@@ -13,6 +17,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.ModelFuncionario;
+import util.ReportUtil;
 
 @WebServlet(urlPatterns = {"/ServletFuncionario"})
 public class ServletFuncionario extends ServletGenericUtil {
@@ -53,6 +58,60 @@ public class ServletFuncionario extends ServletGenericUtil {
 				request.setAttribute("mf", funcionario); // atributo que vai preencher a tela
 				request.getRequestDispatcher("pages/cad-funcionario.jsp").forward(request, response);
  				
+			// IMPRIMIR PDF ----------		
+			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("imprimirRelatorioPDF")) {
+				 
+				String nome = request.getParameter("nome");
+				 
+				List<ModelFuncionario> mfList = null;
+				 
+				if (nome == null || nome.isEmpty()) {
+					mfList = dao.buscaList();
+				}else {
+					mfList = dao.buscaList(nome);
+				}
+				
+				HashMap<String, Object> params = new HashMap<String, Object>();
+				params.put("PARAM_SUB_REPORT", request.getServletContext().getRealPath("relatorio") + File.separator);
+				 
+				byte[] relatorio = new ReportUtil().geraReltorioPDF(mfList, "rel_func", params ,request.getServletContext());
+				 
+				response.setHeader("Content-Disposition", "attachment;filename=arquivo.pdf");
+				response.getOutputStream().write(relatorio);	
+				
+			// IMPRIMIR NA TELA ----------	
+			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("imprimirRelatorioHtml")) {
+				
+				String nome = request.getParameter("nome");
+				 
+				if (nome == null || nome.isEmpty()) {
+					request.setAttribute("listaFunc", dao.buscaList());
+				}else {
+					request.setAttribute("listaFunc", dao.buscaList(nome));
+				}
+				 
+				request.setAttribute("nome", nome);
+				request.getRequestDispatcher("pages/rel-func.jsp").forward(request, response);	
+				
+			// GERA GRAFICO ----------	
+			} else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("graficoSalario")) {
+				
+				String cargo = request.getParameter("cargo");
+				 
+				if (cargo == null || cargo.isEmpty() || cargo == "") {
+					BEANGraficoSalario bean = dao.mediaSalario(super.getUserLogado(request));
+					ObjectMapper mapper = new ObjectMapper();
+					String json = mapper.writeValueAsString(bean);
+					response.getWriter().write(json);
+				}else {
+					BEANGraficoSalario bean = dao.mediaSalario(cargo, super.getUserLogado(request));
+					ObjectMapper mapper = new ObjectMapper();
+					String json = mapper.writeValueAsString(bean);
+					response.getWriter().write(json);
+				}
+				
+				request.setAttribute("cargo", cargo);
+				
 			} else {
 				request.getRequestDispatcher("pages/cad-funcionario.jsp").forward(request, response);
 			}

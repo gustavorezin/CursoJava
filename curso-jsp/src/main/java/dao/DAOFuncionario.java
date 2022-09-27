@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import bean.BEANGraficoSalario;
 import connection.SingleConnectionBanco;
 import model.ModelFuncionario;
 
@@ -261,6 +262,64 @@ public class DAOFuncionario {
 		}
 		return retornoBusca;
 	}
+	
+	// MEDIA SALARIO ******************************************************************************
+	public BEANGraficoSalario mediaSalario(Integer userLogado) throws Exception {
+		String sql = "SELECT avg(salario) as media_salarial, cargo from funcionario where cod_user = ? group by cargo;";
+		PreparedStatement ps = connection.prepareStatement(sql);
+		
+		ps.setObject(1, userLogado);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		List<Double> salarioList = new ArrayList<Double>();
+		List<String> cargoList = new ArrayList<String>();
+		
+		BEANGraficoSalario bean = new BEANGraficoSalario();
+		
+		while (rs.next()) {
+			Double media_salarial = rs.getDouble("media_salarial");
+			String cargo = rs.getString("cargo");
+			
+			salarioList.add(media_salarial);
+			cargoList.add(cargo);
+		}
+		
+		bean.setSalarioList(salarioList);
+		bean.setCargoList(cargoList);
+		
+		return bean;
+	}
+	
+	// MEDIA SALARIO CARGO ************************************************************************
+	public BEANGraficoSalario mediaSalario(String cargo, Integer userLogado) throws Exception {
+		String sql = "SELECT avg(salario) as media_salarial, cargo from funcionario where cargo = ? AND cod_user = ? group by cargo;";
+		PreparedStatement ps = connection.prepareStatement(sql);
+		
+		ps.setObject(1, cargo);
+		ps.setObject(2, userLogado);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		List<Double> salarioList = new ArrayList<Double>();
+		List<String> cargoList = new ArrayList<String>();
+		
+		BEANGraficoSalario bean = new BEANGraficoSalario();
+		
+		while (rs.next()) {
+			Double media_salarial = rs.getDouble("media_salarial");
+			String cargoFunc = rs.getString("cargo");
+			
+			salarioList.add(media_salarial);
+			cargoList.add(cargoFunc);
+		}
+		
+		bean.setSalarioList(salarioList);
+		bean.setCargoList(cargoList);
+		
+		return bean;
+	}
+	
 	
 	// DELETE  ************************************************************************************
 	public void deletar(String codigo) throws Exception {
